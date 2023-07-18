@@ -16,8 +16,7 @@ The project encapsulates the RL training process within the `Engine` class. This
 
 Firstly, you need to activate the environment by running the following command in your shell:
 
-```bash
-source activate_env.sh
+`source activate_env.sh`
 
 This will set up and activate the working environment necessary for running the project.
 
