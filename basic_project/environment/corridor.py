@@ -40,5 +40,6 @@ class SimpleCorridor(gym.Env):
             {},
         )
 
+
 def simple_corridor_creator(env_config):
     return SimpleCorridor(env_config)

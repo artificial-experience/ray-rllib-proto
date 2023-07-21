@@ -5,6 +5,7 @@ import click
 from delegator import TunerDelegator
 from common import constants, methods
 
+
 class Tune:
     """
     Interface class between ray and farma gym
@@ -27,7 +28,7 @@ class Tune:
         self._results = None
         self._logger = None
 
-        #TODO connect W&B 
+        # TODO connect W&B
         self._monitor = None
 
     def _set_trial_configuration(self):
@@ -39,10 +40,10 @@ class Tune:
     def _prepare_trial(self):
         self._tuner = TunerDelegator.from_trial_directive(
             construct_directive=self._construct_directive,
-            tuner_directive=self._tuner_directive
+            tuner_directive=self._tuner_directive,
         ).delegate_tuner_entity()
 
-    #TODO: add possibility to connect to AWS as remote=True
+    # TODO: add possibility to connect to AWS as remote=True
     def execute_trial(self, remote=False):
         self._set_trial_configuration()
         self._prepare_trial()
@@ -57,8 +58,7 @@ class Tune:
             pass
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     basic_config_name = "basic-config.yaml"
     tune = Tune(basic_config_name)
     tune.execute_trial()
-        

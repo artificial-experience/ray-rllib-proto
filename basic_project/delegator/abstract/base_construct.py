@@ -1,5 +1,6 @@
 from .registration import ConstructRegistry
 
+
 class BaseConstruct:
     @classmethod
     def __init_subclass__(cls, **kwargs):

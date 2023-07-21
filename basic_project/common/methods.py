@@ -9,6 +9,7 @@ from os.path import expandvars
 
 import yaml
 
+
 def load_yaml(yaml_path):
     def process_dict(dict_to_process):
         for key, item in dict_to_process.items():
@@ -38,6 +39,7 @@ def load_yaml(yaml_path):
 
     return process_dict(yaml_content)
 
+
 def get_current_timestamp(use_hour=True):
     if use_hour:
         return datetime.now().strftime("%Y%m%d-%H%M%S")
@@ -45,7 +47,9 @@ def get_current_timestamp(use_hour=True):
         return datetime.now().strftime("%Y%m%d")
 
 
-def get_nested_dict_field(*, directive: Dict[str, Any], keys: List[str]) -> Optional[Any]:
+def get_nested_dict_field(
+    *, directive: Dict[str, Any], keys: List[str]
+) -> Optional[Any]:
     """
     Get a nested value from a dictionary.
 
@@ -56,12 +60,14 @@ def get_nested_dict_field(*, directive: Dict[str, Any], keys: List[str]) -> Opti
     Returns:
         The target value if it exists in the dictionary. Otherwise, returns None.
     """
-    return reduce(lambda d, key: d.get(key) if isinstance(d, dict) else None, keys, directive)
+    return reduce(
+        lambda d, key: d.get(key) if isinstance(d, dict) else None, keys, directive
+    )
 
 
 def register_custom_env(env_id, env_creator_func):
     """register a custom environment if it's not already registered"""
-    
+
     def is_env_registered(env_name):
         is_registered = False
         try:

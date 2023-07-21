@@ -18,6 +18,7 @@ gymnasium = "0.26.3"
 glfw = "^2.6.2"
 mujoco = "^2.3.6"
 click = "^8.1.6"
+black = "^23.7.0"
 
 
 [build-system]

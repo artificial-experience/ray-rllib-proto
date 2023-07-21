@@ -12,20 +12,32 @@ class PPOConstruct(BaseConstruct):
     @classmethod
     def from_construct_registry_directive(cls, construct_registry_directive: str):
         instance = cls(construct_registry_directive)
-        path_to_construct_file = construct_registry_directive.get("path_to_construct_file", None)
-        construct_file_path = constants.Directories.TRAINABLE_CONFIG_DIR.value / path_to_construct_file
+        path_to_construct_file = construct_registry_directive.get(
+            "path_to_construct_file", None
+        )
+        construct_file_path = (
+            constants.Directories.TRAINABLE_CONFIG_DIR.value / path_to_construct_file
+        )
         instance._construct_configuration = methods.load_yaml(construct_file_path)
         return instance
 
     def _validate_and_register_custom_env(self):
-        custom_env_prefix = self._construct_configuration["env-directive"]["prefix"]["choice"]
-        custom_env_config = self._construct_configuration["env-directive"]["env_config"]["choice"]
-        custom_env_class_creator = self._construct_configuration["env-directive"]["custom_env_class_creator"]["choice"]
-        
+        custom_env_prefix = self._construct_configuration["env-directive"]["prefix"][
+            "choice"
+        ]
+        custom_env_config = self._construct_configuration["env-directive"][
+            "env_config"
+        ]["choice"]
+        custom_env_class_creator = self._construct_configuration["env-directive"][
+            "custom_env_class_creator"
+        ]["choice"]
+
         custom_env_creator_function = getattr(environment, custom_env_class_creator)
         methods.register_custom_env(
-            env_id=custom_env_prefix, 
-            env_creator_func=lambda config: custom_env_creator_function(custom_env_config)
+            env_id=custom_env_prefix,
+            env_creator_func=lambda config: custom_env_creator_function(
+                custom_env_config
+            ),
         )
 
     def _env_config(self):
