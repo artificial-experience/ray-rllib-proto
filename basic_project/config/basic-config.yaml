@@ -2,7 +2,7 @@ construct_directive:
   configuration:
     config_name:
       type: str
-      choice: ppo-256-256-default-lstm.yaml
+      choice: ppo-256-256-no-attention.yaml
     construct_class:
       type: str
       choice: PPOConstruct
@@ -19,13 +19,13 @@ tuner_directive:
     stop-config:
       training_iteration:
         type: int
-        choice: 10000
+        choice: 4000
       timesteps_total:
         type: int
-        choice: 40000000
+        choice: 100000
       episode_reward_mean:
         type: float
-        choice: 1000.0
+        choice: 0.7
     checkpoint-config:
         checkpoint_frequency:
           type: int

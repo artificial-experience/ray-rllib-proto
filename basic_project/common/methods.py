@@ -1,5 +1,7 @@
 from functools import reduce
 from typing import List, Dict, Any, Optional
+from ray.tune.registry import register_env
+from ray.tune.registry import _global_registry, ENV_CREATOR
 
 from datetime import datetime
 from functools import wraps
@@ -55,3 +57,24 @@ def get_nested_dict_field(*, directive: Dict[str, Any], keys: List[str]) -> Opti
         The target value if it exists in the dictionary. Otherwise, returns None.
     """
     return reduce(lambda d, key: d.get(key) if isinstance(d, dict) else None, keys, directive)
+
+
+def register_custom_env(env_id, env_creator_func):
+    """register a custom environment if it's not already registered"""
+    
+    def is_env_registered(env_name):
+        is_registered = False
+        try:
+            # If the environment can be created, then it is registered
+            _global_registry.get(ENV_CREATOR, env_name)
+            is_registered = True
+        except Exception as e:
+            pass
+
+        return is_registered
+
+    if not is_env_registered(env_id):
+        register_env(env_id, env_creator_func)
+        print(f"Environment '{env_id}' is registered.")
+    else:
+        print(f"Environment '{env_id}' is already registered.")

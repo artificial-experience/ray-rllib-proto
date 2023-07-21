@@ -44,7 +44,7 @@ ppo-directive:
       type: dict
       choice: {
         "fcnet_hiddens": [256, 256],
-        "use_lstm": true,
+        "use_lstm": false,
         }
   resources:
     num_gpus:
@@ -61,4 +61,15 @@ ppo-directive:
 env-directive:
   prefix:
     type: str
-    choice: HalfCheetah-v4
+    choice: simple-corridor-v0
+  custom_env_class_name:
+    type: str
+    choice: SimpleCorridor
+  custom_env_class_creator:
+    type: str
+    choice: simple_corridor_creator
+  env_config:
+    type: dict
+    choice: {
+      "corridor_length": 5,
+      }
