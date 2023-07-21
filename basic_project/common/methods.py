@@ -1,3 +1,6 @@
+from functools import reduce
+from typing import List, Dict, Any, Optional
+
 from datetime import datetime
 from functools import wraps
 from os.path import expandvars
@@ -38,3 +41,17 @@ def get_current_timestamp(use_hour=True):
         return datetime.now().strftime("%Y%m%d-%H%M%S")
     else:
         return datetime.now().strftime("%Y%m%d")
+
+
+def get_nested_dict_field(*, directive: Dict[str, Any], keys: List[str]) -> Optional[Any]:
+    """
+    Get a nested value from a dictionary.
+
+    Args:
+        directives: The target dictionary.
+        keys: A list of keys representing the path to the target value in the dictionary.
+
+    Returns:
+        The target value if it exists in the dictionary. Otherwise, returns None.
+    """
+    return reduce(lambda d, key: d.get(key) if isinstance(d, dict) else None, keys, directive)

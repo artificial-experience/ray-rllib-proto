@@ -1,17 +1,7 @@
-param-space:
-  environment:
-    env_name:
-      type: str
-      choice: HalfCheetah-v4
-    file-name:
-      type: str
-      choice: null
-    render-graphics:
-      type: bool
-      choice: false
-    horizon:
-      type: int
-      choice: 3000
+ppo-directive:
+  trainable:
+    type: str
+    choice: PPO
   rollouts:
     num-workers:
       type: int
@@ -68,30 +58,7 @@ param-space:
       type: int
       choice: 100
 
-
-tuner-space:
-  trainable:
+env-directive:
+  prefix:
     type: str
-    choice: PPO
-  ai-runtime-conditions:
-    run-config:
-      verbose:
-        type: int
-        choice: 1
-    stop-config:
-      training_iteration:
-        type: int
-        choice: 10000
-      timesteps_total:
-        type: int
-        choice: 40000000
-      episode_reward_mean:
-        type: float
-        choice: 1000.0
-    checkpoint-config:
-        checkpoint_frequency:
-          type: int
-          choice: 1000
-        checkpoint_at_end:
-          type: bool
-          choice: true
+    choice: HalfCheetah-v4
