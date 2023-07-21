@@ -9,6 +9,7 @@ This repository provides a structured, modular setup for training Reinforcement 
 ├── basic_project
 │   ├── common                # Module containing commonly used constants and methods
 │   ├── config                # Module containing configuration files (main config and trainable configurations)
+│   ├── environment           # Module containing custom environment implementation along with creator function
 │   ├── delegator             # Main module containing classes responsible for delegating tasks
 │   │   ├── abstract          # Submodule containing abstract base classes
 │   │   ├── construct         # Submodule containing different RL algorithm constructs
